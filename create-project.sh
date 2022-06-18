@@ -49,15 +49,22 @@ else
         cd u-boot/
         git pull --no-edit https://git.beagleboard.org/beagleboard/u-boot.git v2022.04-bbb.io-am335x-am57xx
 fi
-cd u-boot/
-make ARCH=arm CROSS_COMPILE=${CC} distclean
-make ARCH=arm CROSS_COMPILE=${CC} am335x_evm_defconfig
-make ARCH=arm CROSS_COMPILE=${CC}
+
+#no need to build u-boot
+#make ARCH=arm CROSS_COMPILE=${CC} distclean
+#make ARCH=arm CROSS_COMPILE=${CC} am335x_evm_defconfig
+#make ARCH=arm CROSS_COMPILE=${CC}
 
 #kernel
 cd $DIR
 git clone https://github.com/RobertCNelson/bb-kernel ./kernelbuildscripts
 cd kernelbuildscripts/
-sed -i '9i \\t CC=DIR/gcc-arm-$CC_VERSION-x86_64-arm-none-linux-gnueabihf/bin/arm-none-linux-gnueabihf-' system-test.sh
 git checkout origin/am33x-v5.10 -b tmp
+#Give correct toolchain
+#sed -i '9d' system.sh.sample
+#sed -i '11i \\t CC=${PWD}/../gcc-arm-11.2-2022.02-x86_64-arm-none-linux-gnueabihf/gcc-arm-11.2-2022.02-x86_64-arm-none-linux-gnueabihf/bin/arm-none-linux-gnueabihf-' system.sh.sample
+sed -i '11i CC=${PWD}/../gcc-arm-11.2-2022.02-x86_64-arm-none-linux-gnueabihf/bin/arm-none-linux-gnueabihf-' system.sh.sample
+#remove lines which builds the kernel, just patch the kernel
+sed -i '213,228d' build_kernel.sh
 ./build_kernel.sh
+
