@@ -1,0 +1,7 @@
+uname_r=5.10.73
+enable_uboot_overlays=1
+uenv_root=/dev/mmcblk0p2
+enable_uboot_overlays=1
+uboot_overlay_addr0=/boot/overlays/BB-BONE-LCD4-01-00A1.dtbo
+disable_uboot_overlay_video=1
+disable_uboot_overlay_adc=1
