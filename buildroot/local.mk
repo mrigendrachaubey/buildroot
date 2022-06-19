@@ -1,2 +1,2 @@
-LINUX_OVERRIDE_SRCDIR = ../bb-kernel/KERNEL
+LINUX_OVERRIDE_SRCDIR = ../kernelbuildscripts/KERNEL
 UBOOT_OVERRIDE_SRCDIR = ../u-boot

@@ -19,25 +19,31 @@ else
         git checkout master
 fi
 
+#copy changed buildroot to latest buildroot
+cd $DIR/..
+rsync -avh buildroot/ $DIR/buildroot
 
 #downldad clone cross compiler, now linaro toolchains are hosted on arm website.
 #cross compilers from https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain/downloads or https://www.linaro.org/downloads/
 cd $DIR
-export CC_VERSION=11.2-2022.02
+#export CC_VERSION=11.2-2022.02
+export CC_VERSION=10.2.1-2021.04
 if [ -d "$DIR"/gcc-arm-$CC_VERSION-x86_64-arm-none-linux-gnueabihf ]
 then
         echo "Compiler exists"
         ${CC}gcc --version
 else
-        #LINARO_CC_LINK=git@github.com:mrigendrachaubey/gcc-linaro-10.2.1-2021.04-x86_64_arm-linux-gnueabihf.git
-        #git clone $LINARO_CC_LINK
-        LATEST_CC_LINK=https://developer.arm.com/-/media/Files/downloads/gnu/$CC_VERSION/binrel/gcc-arm-$CC_VERSION-x86_64-arm-none-linux-gnueabihf.tar.xz
-        wget $LATEST_CC_LINK 
-        tar -xf gcc-arm-$CC_VERSION-x86_64-arm-none-linux-gnueabihf.tar.xz
+        LINARO_CC_LINK_KERNEL_HEADERS_5_10_x=git@github.com:mrigendrachaubey/gcc-linaro-$CC_VERSION-x86_64_arm-linux-gnueabihf.git
+        git clone $LINARO_CC_LINK_KERNEL_HEADERS_5_10_x
+        mv gcc-linaro-10.2.1-2021.04-x86_64_arm-linux-gnueabihf/gcc-linaro-$CC_VERSION-x86_64_arm-linux-gnueabihf.tar.xz $DIR
+        rm -rf gcc-linaro-$CC_VERSION-x86_64_arm-linux-gnueabihf/
+        tar -xf gcc-linaro-$CC_VERSION-x86_64_arm-linux-gnueabihf.tar.xz
+        #LATEST_CC_LINK_KERNEL_HEADERS_4_20_x=https://developer.arm.com/-/media/Files/downloads/gnu/$CC_VERSION/binrel/gcc-arm-$CC_VERSION-x86_64-arm-none-linux-gnueabihf.tar.xz
+        #wget $LATEST_CC_LINK 
+        #tar -xf gcc-arm-$CC_VERSION-x86_64-arm-none-linux-gnueabihf.tar.xz
+        #export CC=$DIR/gcc-arm-$CC_VERSION-x86_64-arm-none-linux-gnueabihf/bin/arm-none-linux-gnueabihf-
 fi
-
-export CC=$DIR/gcc-arm-$CC_VERSION-x86_64-arm-none-linux-gnueabihf/bin/arm-none-linux-gnueabihf-
-
+export CC=$DIR/gcc-arm-$CC_VERSION-x86_64-arm-linux-gnueabihf/bin/arm-linux-gnueabihf
 
 #uboot
 if [ -d "$DIR"/u-boot ]
@@ -67,4 +73,8 @@ sed -i '11i CC=${PWD}/../gcc-arm-11.2-2022.02-x86_64-arm-none-linux-gnueabihf/bi
 #remove lines which builds the kernel, just patch the kernel
 sed -i '213,228d' build_kernel.sh
 ./build_kernel.sh
+cp -v $DIR/../omap2plus_custom_bbb_defconfig $DIR/kernelbuildscripts/KERNEL/arch/arm/configs/
 
+cd $DIR/buildroot
+make beaglebone_exp_defconfig
+make -j6
