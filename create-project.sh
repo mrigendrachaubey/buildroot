@@ -42,6 +42,7 @@ else
         #wget $LATEST_CC_LINK 
         #tar -xf gcc-arm-$CC_VERSION-x86_64-arm-none-linux-gnueabihf.tar.xz
         #export CC=$DIR/gcc-arm-$CC_VERSION-x86_64-arm-none-linux-gnueabihf/bin/arm-none-linux-gnueabihf-
+        ${CC}gcc --version
 fi
 export CC=$DIR/gcc-arm-$CC_VERSION-x86_64-arm-linux-gnueabihf/bin/arm-linux-gnueabihf
 
@@ -69,7 +70,7 @@ git checkout origin/am33x-v5.10 -b tmp
 #Give correct toolchain
 #sed -i '9d' system.sh.sample
 #sed -i '11i \\t CC=${PWD}/../gcc-arm-11.2-2022.02-x86_64-arm-none-linux-gnueabihf/gcc-arm-11.2-2022.02-x86_64-arm-none-linux-gnueabihf/bin/arm-none-linux-gnueabihf-' system.sh.sample
-sed -i '11i CC=${PWD}/../gcc-arm-11.2-2022.02-x86_64-arm-none-linux-gnueabihf/bin/arm-none-linux-gnueabihf-' system.sh.sample
+sed -i '11i CC=${PWD}/../gcc-linaro-10.2.1-2021.04-x86_64_arm-linux-gnueabihf/bin/arm-linux-gnueabihf-' system.sh.sample
 #remove lines which builds the kernel, just patch the kernel
 sed -i '213,228d' build_kernel.sh
 ./build_kernel.sh
