@@ -1,0 +1,226 @@
+manifest_format=1.6
+
+# Note that for ABE, these parameters are not used
+# Component data for dejagnu
+dejagnu_url=http://git.linaro.org/git/toolchain
+dejagnu_branch=linaro-local/stable
+dejagnu_revision=a52a926e39ab80d95799e976c12c59b2b30d2c69
+dejagnu_filespec=dejagnu.git
+dejagnu_mingw_only="no"
+dejagnu_linuxhost_only="no"
+dejagnu_staticlink="yes"
+
+# Component data for gmp
+gmp_url=http://snapshots.linaro.org/components/toolchain/infrastructure
+gmp_filespec=gmp-6.1.2.tar.xz
+gmp_md5sum=f58fa8001d60c4c77595fbbb62b63c1d
+gmp_mingw_only="no"
+gmp_linuxhost_only="no"
+gmp_configure="--enable-cxx --enable-fft"
+gmp_staticlink="yes"
+
+# Component data for mpfr
+mpfr_url=http://snapshots.linaro.org/components/toolchain/infrastructure
+mpfr_filespec=mpfr-3.1.5.tar.xz
+mpfr_md5sum=c4ac246cf9795a4491e7766002cd528f
+mpfr_mingw_only="no"
+mpfr_linuxhost_only="no"
+mpfr_configure="--with-gmp=${local_builds}/destdir/${host}"
+mpfr_staticlink="yes"
+
+# Component data for mpc
+mpc_url=http://snapshots.linaro.org/components/toolchain/infrastructure/
+mpc_filespec=mpc-1.0.3.tar.gz
+mpc_md5sum=d6a1d5f8ddea3abd2cc3e98f58352d26
+mpc_mingw_only="no"
+mpc_linuxhost_only="no"
+mpc_configure="--with-gmp=${local_builds}/destdir/${host} --with-mpfr=${local_builds}/destdir/${host}"
+mpc_staticlink="yes"
+
+# Component data for binutils
+binutils_url=http://git.linaro.org/git/toolchain
+binutils_branch=binutils-2_35-branch
+binutils_revision=d8768ca6a736699e67e85e395b0b6e8058704456
+binutils_filespec=binutils-gdb.git
+binutils_mingw_only="no"
+binutils_linuxhost_only="no"
+binutils_configure="--enable-lto --enable-plugins --enable-gold --disable-werror CPPFLAGS=-UFORTIFY_SOURCE --with-pkgversion=Linaro_Binutils-2021.04 --disable-gdb --disable-sim --disable-libdecnumber --disable-readline --with-sysroot=${local_builds}/destdir/${host}/arm-linux-gnueabihf"
+binutils_staticlink="yes"
+
+# Component data for linux
+linux_url=git://git.kernel.org/pub/scm/linux/kernel/git/stable
+linux_branch=linux-rolling-lts
+linux_revision=e2eb5bca68122e91bd3f3c32242c24c6064ed7af
+linux_filespec=linux.git
+linux_mingw_only="no"
+linux_linuxhost_only="no"
+linux_staticlink="yes"
+
+# Component data for expat
+expat_url=http://snapshots.linaro.org/components/toolchain/infrastructure/
+expat_filespec=expat-2.1.0-1-mingw32-dev.tar.xz
+expat_md5sum=1dae54e2670882843d496692154a0e27
+expat_mingw_only="yes"
+expat_linuxhost_only="no"
+expat_staticlink="yes"
+
+# Component data for python
+python_url=http://snapshots.linaro.org/components/toolchain/infrastructure/
+python_filespec=python-2.7.4-mingw32.tar.xz
+python_md5sum=9b3092eff5508c4802936dfe4f5225ef
+python_mingw_only="yes"
+python_linuxhost_only="no"
+python_staticlink="yes"
+
+# Component data for libiconv
+libiconv_url=http://snapshots.linaro.org/components/toolchain/infrastructure/
+libiconv_filespec=libiconv-1.14-3-mingw32-dev.tar.xz
+libiconv_md5sum=7ead614fa3a8bc266e70c6fcdf198219
+libiconv_mingw_only="yes"
+libiconv_linuxhost_only="no"
+libiconv_staticlink="yes"
+
+# Component data for gcc
+gcc_url=http://git.linaro.org/git/toolchain
+gcc_branch=releases/gcc-10
+gcc_revision=bab1d20e09d385f2b92d066cd11971e200b0a18a
+gcc_filespec=gcc.git
+gcc_makeflags="MAKEINFOFLAGS=--force"
+gcc_mingw_only="no"
+gcc_linuxhost_only="no"
+gcc_configure=
+gcc_mingw_extraconf="--with-libiconv-prefix=${local_builds}/destdir/${host}/usr --with-system-zlib=no"
+gcc_staticlink="no"
+gcc_stage1_flags="--with-mpc=${local_builds}/destdir/${host} --with-mpfr=${local_builds}/destdir/${host} --with-gmp=${local_builds}/destdir/${host} --with-gnu-as --with-gnu-ld --disable-libmudflap --enable-lto --enable-shared --without-included-gettext --enable-nls --with-system-zlib --disable-sjlj-exceptions --enable-gnu-unique-object --enable-linker-build-id --disable-libstdcxx-pch --enable-c99 --enable-clocale=gnu --enable-libstdcxx-debug --enable-long-long --with-cloog=no --with-ppl=no --with-isl=no --disable-multilib --with-float=hard --with-fpu=vfpv3-d16 --with-mode=thumb --with-tune=cortex-a9 --with-arch=armv7-a --enable-threads=posix --enable-multiarch --enable-libstdcxx-time=yes --enable-gnu-indirect-function --disable-libssp --disable-libquadmath --disable-threads --without-headers --with-newlib --disable-libmudflap --disable-bootstrap --disable-decimal-float --disable-libgomp --disable-libatomic --disable-libsanitizer --disable-plugins --disable-libitm --enable-languages=c,c++ --disable-libstdcxx --disable-libvtv --disable-shared --with-glibc-version=2.18"
+gcc_stage2_flags="--with-mpc=${local_builds}/destdir/${host} --with-mpfr=${local_builds}/destdir/${host} --with-gmp=${local_builds}/destdir/${host} --with-gnu-as --with-gnu-ld --disable-libmudflap --enable-lto --enable-shared --without-included-gettext --enable-nls --with-system-zlib --disable-sjlj-exceptions --enable-gnu-unique-object --enable-linker-build-id --disable-libstdcxx-pch --enable-c99 --enable-clocale=gnu --enable-libstdcxx-debug --enable-long-long --with-cloog=no --with-ppl=no --with-isl=no --disable-multilib --with-float=hard --with-fpu=vfpv3-d16 --with-mode=thumb --with-tune=cortex-a9 --with-arch=armv7-a --enable-threads=posix --enable-multiarch --enable-libstdcxx-time=yes --enable-gnu-indirect-function --with-sysroot=${local_builds}/destdir/${host}/arm-linux-gnueabihf/libc --enable-checking=release --disable-bootstrap --enable-languages=c,c++,fortran,lto"
+
+# Component data for glibc
+glibc_url=http://git.linaro.org/git/toolchain
+glibc_branch=release/2.33/master
+glibc_revision=e78ea9bd26199497b9f047e421f16284297629cf
+glibc_filespec=glibc.git
+glibc_makeflags="PARALLELMFLAGS=-j32"
+glibc_mingw_only="no"
+glibc_linuxhost_only="no"
+glibc_configure="--disable-profile --without-gd --enable-obsolete-rpc --with-headers=${local_builds}/destdir/${host}/arm-linux-gnueabihf/libc/usr/include libc_cv_forced_unwind=yes libc_cv_c_cleanup=yes --without-selinux --disable-werror"
+
+# Component data for gdb
+gdb_url=http://git.linaro.org/git/toolchain
+gdb_branch=gdb-10-branch
+gdb_revision=ae13cfbbf58a2df18f106bb4a44620016b4d09db
+gdb_filespec=binutils-gdb.git
+gdb_makeflags="all-gdb"
+gdb_mingw_only="no"
+gdb_linuxhost_only="no"
+gdb_configure="--with-gnu-ld --enable-plugins --enable-tui --with-pkgversion=Linaro_GDB-2021.04 --disable-gas --disable-binutils --disable-elfcpp --disable-ld --disable-gold --disable-gprof --with-python=python3"
+gdb_mingw_extraconf="--disable-tui --with-python=${local_snapshots}/python-2.7.4-mingw32 CFLAGS=-I${local_builds}/destdir/${host}/usr/include LDFLAGS=-L${local_builds}/destdir/${host}/usr/lib"
+gdb_staticlink="yes"
+
+# Component data for gdbserver
+gdbserver_url=http://git.linaro.org/git/toolchain
+gdbserver_branch=gdb-10-branch
+gdbserver_revision=ae13cfbbf58a2df18f106bb4a44620016b4d09db
+gdbserver_filespec=binutils-gdb.git
+gdbserver_makeflags="all-gdbserver"
+gdbserver_mingw_only="no"
+gdbserver_linuxhost_only="no"
+gdbserver_configure="--with-gnu-ld --enable-plugins --enable-tui --with-pkgversion=Linaro_GDB-2021.04 --disable-gas --disable-binutils --disable-elfcpp --disable-ld --disable-gold --disable-gprof --with-python=python3"
+gdbserver_staticlink="yes"
+
+# Component data for qemu
+qemu_url=git://git.qemu.org
+qemu_branch=stable-5.0
+qemu_revision=386b2a5767f7642521cd07930c681ec8a6057e60
+qemu_filespec=qemu.git
+qemu_mingw_only="no"
+qemu_linuxhost_only="yes"
+qemu_configure="--target-list=arm-linux-user,arm-softmmu"
+qemu_staticlink="no"
+
+
+clibrary=glibc
+target=arm-linux-gnueabihf
+manifestid=02481d373f13d4a61eb5c0fa5ffc8ceb0c0d183a
+
+ ##############################################################################
+ # Everything below this line is only for informational purposes for developers
+ ##############################################################################
+
+# Build machine data
+build: linux
+host: x86_64-pc-linux-gnu
+kernel: 4.15.0-91-generic
+hostname: 024df6870b41
+distribution: bionic
+host_gcc: gcc version 7.5.0 (Ubuntu 7.5.0-3ubuntu1~18.04) 
+
+# These aren't used in the repeat build. just a sanity check for developers
+build directory: /home/tcwg-buildslave/workspace/tcwg-dev-build/_build/builds
+sysroot directory: /home/tcwg-buildslave/workspace/tcwg-dev-build/_build/builds/destdir/x86_64-pc-linux-gnu/arm-linux-gnueabihf
+snapshots directory: /home/tcwg-buildslave/workspace/tcwg-dev-build/snapshots
+git reference directory: /home/tcwg-buildslave/snapshots-ref
+
+abe_url=https://git-us.linaro.org/toolchain
+abe_branch=branch=
+abe_revision=0a571d9c4cb3a24fed8de8a7f496e362a646c11c
+abe_filespec=abe.git
+abe_configure="--with-local-snapshots=${local_snapshots} --with-git-reference-dir=/home/tcwg-buildslave/snapshots-ref"
+
+--------------------- gcc ----------------------
+commit bab1d20e09d385f2b92d066cd11971e200b0a18a
+Author: GCC Administrator <gccadmin@gcc.gnu.org>
+Date:   Wed Apr 7 00:17:25 2021 +0000
+
+    Daily bump.
+
+--------------------- binutils ----------------------
+commit d8768ca6a736699e67e85e395b0b6e8058704456
+Author: H.J. Lu <hjl.tools@gmail.com>
+Date:   Thu Mar 18 18:34:38 2021 -0700
+
+    DWARF: Check version >= 3 for DW_FORM_ref_addr
+    
+    Check version >= 3, instead of version == 3 || version == 4, for
+    DW_FORM_ref_addr.
+    
+    bfd/
+    
+            PR ld/27587
+            * dwarf2.c (read_attribute_value): Check version >= 3 for
+            DW_FORM_ref_addr.
+    
+    (cherry picked from commit 51f6e7a9f4210aed0f8156c1d2e348de6f96f37d)
+
+--------------------- glibc ----------------------
+commit e78ea9bd26199497b9f047e421f16284297629cf
+Author: Joseph Myers <joseph@codesourcery.com>
+Date:   Thu Apr 1 20:14:50 2021 +0000
+
+    Update Nios II libm-test-ulps.
+    
+    This has a subset of the changes in the version applied to master
+    (only those that actually appear in a regeneration on 2.33 branch).
+
+--------------------- abe ----------------------
+commit 0a571d9c4cb3a24fed8de8a7f496e362a646c11c
+Author: Christophe Lyon <christophe.lyon@linaro.org>
+Date:   Thu Mar 4 20:49:33 2021 +0000
+
+    config/gcc.conf: Don't set default multilib setting if the user has overridden them
+    
+    Without this patch, if the user uses --set gcc_override_configure=--disable-multilib
+    GCC for arm-eabi is effectively configured with:
+    --enable-multilib --with-multilib-list=aprofile --disable-multilib
+    
+    If the user also overrides --with-cpu, GCC's consistency checks fail
+    because --with-multilib-list=aprofile is still taken into account and
+    considered conflicting with --with-cpu (--disable-multilib does not
+    remove multiib-list).
+    
+    This patch avoids setting the detault multilib flags if the user has
+    overridden then, so for instance the above example would result in
+    configuring with --disable-multilib --with-cpu=XXX, which would pass
+    GCC consistency checks.
+    
+    Change-Id: I67c29de3165599c2dcda4a64aaf135d228f67b5e
+
