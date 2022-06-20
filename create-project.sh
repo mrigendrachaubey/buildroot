@@ -33,11 +33,11 @@ then
         echo "Compiler exists"
         ${CC}gcc --version
 else
-        LINARO_CC_LINK_KERNEL_HEADERS_5_10_x=git@github.com:mrigendrachaubey/gcc-linaro-$CC_VERSION-x86_64_arm-linux-gnueabihf.git
-        git clone $LINARO_CC_LINK_KERNEL_HEADERS_5_10_x
-        mv gcc-linaro-10.2.1-2021.04-x86_64_arm-linux-gnueabihf/gcc-linaro-$CC_VERSION-x86_64_arm-linux-gnueabihf.tar.xz $DIR
-        rm -rf gcc-linaro-$CC_VERSION-x86_64_arm-linux-gnueabihf/
-        tar -xf gcc-linaro-$CC_VERSION-x86_64_arm-linux-gnueabihf.tar.xz
+        #LINARO_CC_LINK_KERNEL_HEADERS_5_10_x=git@github.com:mrigendrachaubey/gcc-linaro-$CC_VERSION-x86_64_arm-linux-gnueabihf.git
+        #git clone $LINARO_CC_LINK_KERNEL_HEADERS_5_10_x
+        mv gcc-linaro-10.2.1-2021.04-x86_64_arm-linux-gnueabihf/ $DIR/
+        #rm -rf gcc-linaro-$CC_VERSION-x86_64_arm-linux-gnueabihf/
+        #tar -xf gcc-linaro-$CC_VERSION-x86_64_arm-linux-gnueabihf.tar.xz
         #LATEST_CC_LINK_KERNEL_HEADERS_4_20_x=https://developer.arm.com/-/media/Files/downloads/gnu/$CC_VERSION/binrel/gcc-arm-$CC_VERSION-x86_64-arm-none-linux-gnueabihf.tar.xz
         #wget $LATEST_CC_LINK 
         #tar -xf gcc-arm-$CC_VERSION-x86_64-arm-none-linux-gnueabihf.tar.xz
