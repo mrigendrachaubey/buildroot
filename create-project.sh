@@ -22,6 +22,7 @@ fi
 #copy changed buildroot to latest buildroot
 cd $DIR/..
 rsync -avh buildroot/ $DIR/buildroot
+chmod a+x $DIR/buildroot/board/beaglebone/post-build.sh
 
 #downldad clone cross compiler, now linaro toolchains are hosted on arm website.
 #cross compilers from https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain/downloads or https://www.linaro.org/downloads/
@@ -35,7 +36,7 @@ then
 else
         #LINARO_CC_LINK_KERNEL_HEADERS_5_10_x=git@github.com:mrigendrachaubey/gcc-linaro-$CC_VERSION-x86_64_arm-linux-gnueabihf.git
         #git clone $LINARO_CC_LINK_KERNEL_HEADERS_5_10_x
-        mv gcc-linaro-10.2.1-2021.04-x86_64_arm-linux-gnueabihf/ $DIR/
+        cp -R $DIR/../gcc-linaro-10.2.1-2021.04-x86_64_arm-linux-gnueabihf/ $DIR/
         #rm -rf gcc-linaro-$CC_VERSION-x86_64_arm-linux-gnueabihf/
         #tar -xf gcc-linaro-$CC_VERSION-x86_64_arm-linux-gnueabihf.tar.xz
         #LATEST_CC_LINK_KERNEL_HEADERS_4_20_x=https://developer.arm.com/-/media/Files/downloads/gnu/$CC_VERSION/binrel/gcc-arm-$CC_VERSION-x86_64-arm-none-linux-gnueabihf.tar.xz
